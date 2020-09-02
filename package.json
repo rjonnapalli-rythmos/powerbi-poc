@@ -1,0 +1,27 @@
+{
+  "name": "powerbi-poc",
+  "version": "1.0.0",
+  "description": "Embedding power bi dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjonnapalli-rythmos/powerbi-poc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjonnapalli-rythmos/powerbi-poc/issues"
+  },
+  "homepage": "https://github.com/rjonnapalli-rythmos/powerbi-poc#readme",
+  "dependencies": {
+    "adal-node": "^0.2.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}

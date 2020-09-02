@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power BI POC</title>
+
+  <style>
+    #reportContainer {
+      height: 85vh;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Power BI POC</h1>
+  <div id="reportContainer"> </div>
+</body>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/powerbi-client@2.14.0/dist/powerbi.min.js"
+  integrity="sha256-OhH05HCyXCwWAK9sdWbOpP/cTDxfGHg6/ZJT8BFlKsM="
+  crossorigin="anonymous"></script>
+
+<script>
+  var entityType = 'dashboard';
+  var entityId = 'b5f50796-6e97-4dc5-a755-00cf4405e029';
+
+  fetch('sample-embed-data?entityType=dashboard')
+    .then(async (response) => {
+      let result = await response.json().catch(error => ({ ok: false, error }));
+      if (!result.ok) {
+        console.error(result);
+        return;
+      }
+      console.log(result);
+      const { data } = result;
+      var models = window['powerbi-client'].models;
+
+      var embedConfiguration = {
+        type: data.Type,
+        id: data.Id,// '5dac7a4a-4452-46b3-99f6-a25915e0fe55',
+        embedUrl: data.EmbedUrl,
+        tokenType: models.TokenType.Embed,
+        accessToken: data.EmbedToken.Token
+      };
+
+      var $reportContainer = $('#reportContainer');
+      var report = powerbi.embed($reportContainer.get(0), embedConfiguration);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+
+</html>
